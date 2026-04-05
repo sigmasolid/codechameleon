@@ -25,9 +25,8 @@ const BASE_URL = "http://localhost:5122";
 
 export const options = {
   stages: [
-    { duration: "30s", target: 20 }, // ramp up to 20 VUs
-    { duration: "1m",  target: 20 }, // hold at 20 VUs
-    { duration: "20s", target: 0  }, // ramp down
+    { duration: "5s", target: 20 }, // ramp up to 20 VUs
+    { duration: "10s",  target: 20 }, // hold at 20 VUs
   ],
 
   thresholds: {
@@ -62,6 +61,6 @@ export default function () {
   });
 
   // Pause between iterations to mimic a real user's think time
-  sleep(1);
+  sleep(0.1);
 }
 

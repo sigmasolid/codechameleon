@@ -20,8 +20,19 @@ var products = new List<Product>
 app.MapGet("/products", () => Results.Ok(products));
 
 // Always returns a product — uses the id as a key into the catalogue (id % count)
-app.MapGet("/products/{id:int}", (int id) =>
+// Simulate requests that takes >500 ms to demonstrate threshold breaches in K6
+var requestCount = 0;
+
+app.MapGet("/products/{id:int}", async (int id) =>
 {
+    var count = Interlocked.Increment(ref requestCount);
+
+    var delay = count % 25 == 0
+        ? Random.Shared.Next(600, 900)
+        : Random.Shared.Next(20, 150);
+
+    await Task.Delay(delay);
+
     var template = products[Math.Abs(id) % products.Count];
     return Results.Ok(template with { Id = id });
 });
