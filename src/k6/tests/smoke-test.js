@@ -1,21 +1,9 @@
-﻿/**
- * Smoke Test
- * ----------
- * Purpose : Verify every endpoint works correctly before running heavier tests.
- * VUs     : 1
- * Duration: 10 seconds
- *
- * Run:
- *   k6 run tests/smoke-test.js
- */
-
-import http from "k6/http";
+﻿import http from "k6/http";
 import { check, sleep } from "k6";
 
 const BASE_URL = "http://localhost:5122";
 
 export const options = {
-  vus: 1,
   duration: "10s",
 
   // The smoke test must pass every single check — anything less is a red flag.

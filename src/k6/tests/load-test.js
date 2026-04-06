@@ -1,32 +1,13 @@
-﻿/**
- * Load Test
- * ---------
- * Purpose : Simulate a realistic, sustained traffic pattern and verify the API
- *           meets its performance targets under normal load.
- *
- * Stages  :
- *   0 → 20 VUs  over 30 s  (ramp-up)
- *   20 VUs      for  1 min (steady load)
- *   20 → 0 VUs  over 20 s  (ramp-down)
- *
- * Thresholds (the test FAILS if any of these are breached):
- *   • 95th-percentile response time < 500 ms
- *   • HTTP error rate < 1 %
- *   • At least 95 % of checks must pass
- *
- * Run:
- *   k6 run tests/load-test.js
- */
-
-import http from "k6/http";
+﻿import http from "k6/http";
 import { check, sleep } from "k6";
 
 const BASE_URL = "http://localhost:5122";
 
 export const options = {
   stages: [
-    { duration: "5s", target: 20 }, // ramp up to 20 VUs
-    { duration: "10s",  target: 20 }, // hold at 20 VUs
+    { duration: "5s", target: 2000 }, // ramp up to 2000 VUs
+    { duration: "10s",  target: 2000 }, // hold at 2000 VUs
+    { duration: "5s",  target: 0 }, // ramp down to 0 VUs
   ],
 
   thresholds: {
@@ -61,6 +42,6 @@ export default function () {
   });
 
   // Pause between iterations to mimic a real user's think time
-  sleep(0.1);
+  sleep(1);
 }
 
