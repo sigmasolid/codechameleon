@@ -1,7 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// ── Seed data ─────────────────────────────────────────────────────────────────
+# region ── Seed data ──
 var products = new List<Product>
 {
     new(1, "Laptop",        999.99m, "Electronics"),
@@ -13,8 +13,9 @@ var products = new List<Product>
     new(7, "Monitor",       329.99m, "Electronics"),
     new(8, "Notebook",        4.99m, "Stationery"),
 };
+# endregion
 
-// ── Endpoints ─────────────────────────────────────────────────────────────────
+#region  ── Endpoints ──
 
 // Returns the full product catalogue
 app.MapGet("/products", () => Results.Ok(products));
@@ -36,6 +37,7 @@ app.MapGet("/products/{id:int}", async (int id) =>
     var template = products[Math.Abs(id) % products.Count];
     return Results.Ok(template with { Id = id });
 });
+#endregion
 
 app.Run();
 
