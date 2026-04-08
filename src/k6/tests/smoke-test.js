@@ -4,7 +4,7 @@ import { check, sleep } from "k6";
 const BASE_URL = "http://localhost:5122";
 
 export const options = {
-  duration: "5",
+  duration: "5s",
 
   // The smoke test must pass every single check — anything less is a red flag.
   thresholds: {
