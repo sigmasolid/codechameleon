@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Subscriptions.Api/Subscriptions.Api.csproj" />
+  <Project Path="Subscriptions.Tests/Subscriptions.Tests.csproj" />
+  <Project Path="Subscriptions/Subscriptions.csproj" />
+</Solution>
